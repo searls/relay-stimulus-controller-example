@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="importmap">
+      {
+        "imports": {
+          "@hotwired/stimulus": "https://cdn.skypack.dev/pin/@hotwired/stimulus@v3.2.2-pUgKQsZQxrDbqU9d91dC/mode=imports/optimized/@hotwired/stimulus.js",
+          "controllers/": "/js/controllers/",
+          "application": "/js/application.js"
+        }
+      }
+    </script>
+    <script type="module" src="/js/application.js"></script>
+  </head>
+  <body data-controller="relay">
+    <h1>My Cool List</h1>
+    <div data-controller="list-appender"
+      data-action="list-appender:listWasAppended->relay#forward">
+      <form onsubmit="return false;">
+        <label for="name">Name</label>
+        <input type="text" id="name" data-list-appender-target="nameInput" data-action="keydown.enter->list-appender#append">
+        <button type="button" data-action="list-appender#append">Add</button>
+      </form>
+      <ul data-list-appender-target="list">
+      </ul>
+    </div>
+
+    <div data-controller="commentator"
+      data-action="list-appender:listWasAppended->commentator#comment"
+      data-relay-events="list-appender:listWasAppended">
+    </div>
+  </body>
+</html>

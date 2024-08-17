@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+bundle
+bundle exec ruby server.rb
